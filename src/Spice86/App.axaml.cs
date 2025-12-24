@@ -52,6 +52,9 @@ internal partial class App : Application {
         Configuration configuration = new CommandLineParser().ParseCommandLine(
                 desktop.Args!)!;
         Spice86DependencyInjection dependencyInjection = new(configuration, mainWindow);
+        if (configuration.Mcp) {
+            dependencyInjection.Machine.McpServer?.Start();
+        }
         if (mainWindow.DataContext is MainWindowViewModel mainVm) {
             mainVm.CloseMainWindow += (_, _) => mainWindow.Close();
             mainVm.InvalidateBitmap += mainWindow.Image.InvalidateVisual;

@@ -47,6 +47,7 @@
         <PackageReference Include="FluentIcons.Avalonia.Fluent" />
         <PackageReference Include="Iced" />
         <PackageReference Include="JvE.Structurizer" />
+        <PackageReference Include="ModelContextProtocol.SDK" />
         <PackageReference Include="Semi.Avalonia" />
         <PackageReference Include="Semi.Avalonia.DataGrid" />
         <PackageReference Include="Semi.Avalonia.Dock" />

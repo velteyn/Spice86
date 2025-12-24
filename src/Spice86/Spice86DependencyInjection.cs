@@ -44,6 +44,7 @@ using Spice86.Core.Emulator.VM.Breakpoint;
 using Spice86.Core.Emulator.VM.Clock;
 using Spice86.Core.Emulator.VM.CpuSpeedLimit;
 using Spice86.Core.Emulator.VM.EmulationLoopScheduler;
+using Spice86.Emulator.Mcp;
 using Spice86.Logging;
 using Spice86.Shared.Diagnostics;
 using Spice86.Shared.Emulator.Memory;
@@ -541,6 +542,13 @@ public class Spice86DependencyInjection : IDisposable {
             vgaRenderer, vgaBios, vgaRom,
             dmaSystem, soundBlaster.Opl3Fm, softwareMixer, mouse, mouseDriver,
             vgaFunctionality, pauseHandler);
+
+        if (configuration.Mcp) {
+            if (loggerService.IsEnabled(LogEventLevel.Information)) {
+                loggerService.Information("MCP server enabled.");
+            }
+            machine.McpServer = new McpServer(machine);
+        }
 
         if (loggerService.IsEnabled(LogEventLevel.Information)) {
             loggerService.Information("Machine created...");

@@ -153,6 +153,12 @@ public sealed class Configuration {
     public string? Mt32RomsPath { get; init; }
 
     /// <summary>
+    /// Determines whether the MCP server should be enabled or not.
+    /// </summary>
+    [Option(nameof(Mcp), Default = false, Required = false, HelpText = "Enable MCP server.")]
+    public bool Mcp { get; init; }
+
+    /// <summary>
     /// Determines whether EMS (Expanded Memory Specification) should be enabled or not.
     /// </summary>
     [Option(nameof(Ems), Default = null, Required = false, HelpText = "Enable EMS")]

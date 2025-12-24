@@ -1,8 +1,9 @@
-﻿namespace Spice86.Core.Emulator.VM;
+namespace Spice86.Core.Emulator.VM;
 
 using Spice86.Core.Emulator.CPU;
 using Spice86.Core.Emulator.CPU.CfgCpu;
 using Spice86.Core.Emulator.Devices.Cmos;
+using Spice86.Core.Emulator.Mcp;
 using Spice86.Core.Emulator.Devices.DirectMemoryAccess;
 using Spice86.Core.Emulator.Devices.ExternalInput;
 using Spice86.Core.Emulator.Devices.Input.Joystick;
@@ -30,6 +31,11 @@ using Spice86.Core.Emulator.VM.Breakpoint;
 /// </summary>
 public sealed class Machine : IDisposable {
     private bool _disposed;
+
+    /// <summary>
+    /// The MCP server.
+    /// </summary>
+    public IMcpServer? McpServer { get; set; }
 
     /// <summary>
     /// Memory mapped BIOS values.
@@ -271,7 +277,9 @@ public sealed class Machine : IDisposable {
         IMouseDevice mouseDevice,
         IMouseDriver mouseDriver,
         IVgaFunctionality vgaFunctions,
-        IPauseHandler pauseHandler) {
+        IPauseHandler pauseHandler,
+        IMcpServer? mcpServer = null) {
+        McpServer = mcpServer;
         BiosDataArea = biosDataArea;
         BiosEquipmentDeterminationInt11Handler = biosEquipmentDeterminationInt11Handler;
         BiosKeyboardInt9Handler = biosKeyboardInt9Handler;
